@@ -35,6 +35,22 @@ main {
     margin: 10px 15px;
 }
 
+.board-col.empty {
+    cursor: pointer;
+}
+
 .next-yellow {
     background: rgba(255, 255, 0, 0.2)
+}
+
+.next-red {
+    background: rgba(255, 0, 0, 0.2)
+}
+
+.yellow {
+    background-color: #FFFF00;
+}
+
+.red {
+    background-color: #FF0000;
 }

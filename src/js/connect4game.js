@@ -3,6 +3,7 @@ class Connect4Game {
         this.boardRows = 6;
         this.boardCols = 7;
         this.gameBoardSelector = gameBoardSelector;
+        this.player = 'yellow';
 
         this.createGameBoard();
         this.addCoinToBoard();
@@ -44,12 +45,23 @@ class Connect4Game {
         $gameBoard.on('mouseenter', '.board-col.empty', function() {
             const colIndex = $(this).data('board-col');
             const $lastEmptyColumn  = that.getLastEmptyCol(colIndex);
-            $lastEmptyColumn.addClass('next-yellow');
+            $lastEmptyColumn.addClass(`next-${that.player}`);
 
         });
 
         $gameBoard.on('mouseleave', '.board-col', function() {
-            $('.board-col').removeClass('next-yellow');
+            $('.board-col').removeClass(`next-${that.player}`);
+        });
+
+        $gameBoard.on('click', '.board-col.empty', function() {
+            const colIndex = $(this).data('board-col');
+
+            const $lastEmptyColumn  = that.getLastEmptyCol(colIndex);
+            $lastEmptyColumn.removeClass(`empty next-${that.player}`);
+            $lastEmptyColumn.addClass(that.player);
+            
+            that.player = (that.player === 'yellow') ? 'red' : 'yellow';
+            $(this).trigger('mouseenter')
         })
     }
 }
