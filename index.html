@@ -6,9 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Connect 4 by Ada</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="src/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    
+    <header class="bg-dark py-2">
+        <div class="container-fluid">
+            <h1 class="text-white text-monospace">Connect 4</h1>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 offset-lg-3 mt-5">
+                        <div class="game-status-bar p-1 bg-dark rounded-pill" id="gameStatusBar">
+                            <p class="text-white text-center pt-2">
+                                Choose the color of your coin:
+                                <button class="btn btn-danger rounded-circle" id="A">A</button>
+                                <button class="btn btn-warning rounded-circle" id="B">B</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p class="text-center">Copyright &copy; 2019</p>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
