@@ -1,3 +1,36 @@
+main {
+    min-height: 800px;
+}
+
 .game-status-bar {
     font-size: 1.5em;
+}
+
+.game-status-bar>p {
+    margin-bottom: 0.25rem;
+}
+
+.game-board-component {
+    border-top-left-radius: 3em;
+    border-top-right-radius: 3em;
+}
+
+.game-board {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.table-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.table-col {
+    width: 60px;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    margin: 10px 15px;
 }

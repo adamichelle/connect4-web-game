@@ -11,7 +11,7 @@
 <body>
     <header class="bg-dark py-2">
         <div class="container-fluid">
-            <h1 class="text-white text-monospace">Connect 4</h1>
+            <h1 class="text-white font-weight-bold text-monospace">Connect 4</h1>
         </div>
     </header>
 
@@ -21,21 +21,25 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 offset-lg-3 mt-5">
                         <div class="game-status-bar p-1 bg-dark rounded-pill" id="gameStatusBar">
-                            <p class="text-white text-center pt-2">
-                                Choose the color of your coin:
-                                <button class="btn btn-danger rounded-circle" id="A">A</button>
-                                <button class="btn btn-warning rounded-circle" id="B">B</button>
-                            </p>
+                            <p class="text-white text-center pt-1"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-8 offset-lg-2 mt-4">
+                        <div class="game-board-component bg-dark p-5">   
+                            <table class="game-board" id="gameBoard"></table>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
+
+    <footer class="p-2">
         <p class="text-center">Copyright &copy; 2019</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="src/js/main.js" type="module"></script>
 </body>
 </html>
