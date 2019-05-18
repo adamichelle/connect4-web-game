@@ -7,6 +7,7 @@ class Connect4Game {
             "player": "1",
             "color": "yellow"
         };
+        this._gameStatus = 'start';
 
         this.createGameBoard();
         this.addCoinToBoard();
@@ -32,8 +33,10 @@ class Connect4Game {
     }
 
     addCoinToBoard = () => {
+        if(this._gameStatus === 'win') return;
+
         const $gameBoard = $(this._gameBoardSelector);
-        let that = this;
+        let that = this; 
 
         $gameBoard.on('mouseenter', '.board-col.empty', function() {
             const colIndex = $(this).data('board-col');
@@ -57,11 +60,11 @@ class Connect4Game {
             const currentRowIndex = $lastEmptySpot.data('board-row');
             const currentColIndex = $lastEmptySpot.data('board-col');
 
-            //check if there's a winner after each click
+            
             const winner = that.checkForWinner(currentRowIndex, currentColIndex);
             if(winner) {
-                alert(`Player ${winner.player} has won`);
-                return;
+                alert(`Player ${winner.player} wins!`);
+                that.endGame('game won');
             }
 
             that._player.player = (that._player.player === '1') ? '2' : '1';
@@ -136,6 +139,17 @@ class Connect4Game {
 
     getSimilarCoinSpot = (i, j) => {
         return $(`.board-col[data-board-row='${i}'][data-board-col='${j}']`);
+    }
+
+    endGame = (reason) => {
+        if(reason === 'game won') {
+            this._gameStatus = 'win';
+        }
+
+        $(this._gameBoardSelector).off();
+        $('.board-col.empty').css("cursor", "initial");
+        this._gameStatus = 'start';
+        
     }
 }
 
