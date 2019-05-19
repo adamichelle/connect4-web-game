@@ -1,0 +1,66 @@
+main {
+    min-height: 800px;
+}
+
+.game-status-bar {
+    font-size: 1.5em;
+}
+
+.game-status-bar>p {
+    margin-bottom: 0.25rem;
+}
+
+.game-board-component {
+    border-top-left-radius: 3em;
+    border-top-right-radius: 3em;
+    position: relative;
+}
+
+.game-board {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.board-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.board-col {
+    width: 60px;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    margin: 10px 15px;
+}
+
+.board-col.empty {
+    cursor: pointer;
+}
+
+.next-yellow {
+    background: rgba(255, 255, 0, 0.2)
+}
+
+.next-red {
+    background: rgba(255, 0, 0, 0.2)
+}
+
+.yellow {
+    background-color: #FFFF00;
+}
+
+.red {
+    background-color: #FF0000;
+}
+
+.game-alert {
+    display: none;
+    padding: 5rem;
+    position: absolute;
+    z-index: 1;
+    top: calc(70% - 240px);
+    left: calc(70% - 283px);
+}
