@@ -82,7 +82,7 @@ class Connect4Game {
             const winner = this.checkForWinner(currentRowIndex, currentColIndex);
             if(winner) {
                 alert(`Player ${winner.player} wins!`);
-                // this.endGame('game won');
+                this.endGame('game won');
                 return;
             }
 
@@ -151,6 +151,19 @@ class Connect4Game {
 
     getSimilarCoinSpot = (i, j) => {
         return $(`.board-col[data-board-row='${i}'][data-board-col='${j}']`);
+    }
+
+    endGame = (reason) => {
+        if(reason === 'game won') {
+            this._gameStatus = 'win';
+            const message = `Player ${this._player.player} wins!`;
+            this.setGameStatusIndicator(this._player, message);
+        }
+
+        $(this._gameBoardSelector).off();
+        $('.board-col.empty').css("cursor", "initial");
+        this._gameStatus = 'start';
+        $('.game-alert').show();
     }
 
     setGameStatusIndicator = (status, message) => {
