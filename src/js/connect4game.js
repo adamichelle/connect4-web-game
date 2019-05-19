@@ -1,5 +1,5 @@
 class Connect4Game {
-    constructor(gameBoardSelector) {
+    constructor(gameBoardSelector, gameStatusBarSelector) {
         this._gameBoardSelector = gameBoardSelector;
         this._boardRows = 6;
         this._boardCols = 7;
@@ -8,6 +8,8 @@ class Connect4Game {
             "color": "yellow"
         };
         this._gameStatus = 'start';
+        this._gameStatusBarSelector = gameStatusBarSelector;
+        
 
         this.createGameBoard();
         this.addCoinToBoard();
@@ -36,7 +38,10 @@ class Connect4Game {
         if(this._gameStatus === 'win') return;
 
         const $gameBoard = $(this._gameBoardSelector);
-        let that = this; 
+        let that = this;
+
+        let playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+        that.setGameStatusIndicator(this._player, playerTurnMessage);
 
         $gameBoard.on('mouseenter', '.board-col.empty', function() {
             const colIndex = $(this).data('board-col');
@@ -65,10 +70,14 @@ class Connect4Game {
             if(winner) {
                 alert(`Player ${winner.player} wins!`);
                 that.endGame('game won');
+                return;
             }
 
             that._player.player = (that._player.player === '1') ? '2' : '1';
             that._player.color = (that._player.color === 'yellow') ? 'red': 'yellow';
+            playerTurnMessage = `Player ${that._player.player}, Please select a coin spot`;
+            that.setGameStatusIndicator(that._player, playerTurnMessage);
+
             $(this).trigger('mouseenter');
         })
     }
@@ -150,6 +159,12 @@ class Connect4Game {
         $('.board-col.empty').css("cursor", "initial");
         this._gameStatus = 'start';
         
+    }
+
+    setGameStatusIndicator = (status, message) => {
+        const gameStatusBar = this._gameStatusBarSelector;
+        $(`${gameStatusBar}>p`).css('color', `${status.color}`)
+        .text(`${message}`)
     }
 }
 
