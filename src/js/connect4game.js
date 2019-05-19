@@ -73,7 +73,18 @@ class Connect4Game {
             const $lastEmptyCoinSlotInColumn = this.getLastEmptySlotInColumn(colIndex);
             $lastEmptyCoinSlotInColumn.removeClass(`empty next-${this._player.color}`);
             $lastEmptyCoinSlotInColumn.addClass(this._player.color);
-            $lastEmptyCoinSlotInColumn.data('player', this._player.player);
+            $lastEmptyCoinSlotInColumn.data('player', this._player.player)
+        
+            const currentRowIndex = $lastEmptyCoinSlotInColumn.data('board-row');
+            const currentColIndex = $lastEmptyCoinSlotInColumn.data('board-col');
+
+            
+            const winner = this.checkForWinner(currentRowIndex, currentColIndex);
+            if(winner) {
+                alert(`Player ${winner.player} wins!`);
+                // this.endGame('game won');
+                return;
+            }
 
             this._player.player = (this._player.player === '1') ? '2' : '1';
             this._player.color = (this._player.color === 'yellow') ? 'red': 'yellow';
@@ -82,6 +93,64 @@ class Connect4Game {
 
             $(this).trigger('mouseenter');
         }
+    }
+
+    checkForWinner = (currentRowIndex, currentColIndex) => {
+        const directions = {
+            "vertically": {
+                "up": [-1, 0],
+                "down": [1, 0]
+            },
+            "horizontally": {
+                "left": [0, -1],
+                "right": [0, 1]
+            },
+            "diagonallyFromTLtoBR": {
+                "foward": [1, 1],
+                "backward": [-1, -1]
+            },
+            "diagonallyFromBRtoTL": {
+                "foward": [-1, 1],
+                "backward": [1, -1]
+            }
+        }
+
+        return (
+            this.checkPossibleWinOutcomes('vertically', directions.vertically.up, directions.vertically.down, currentRowIndex, currentColIndex) ||
+            this.checkPossibleWinOutcomes('horizontally', directions.horizontally.left, directions.horizontally.right, currentRowIndex, currentColIndex) ||
+            this.checkPossibleWinOutcomes('diagonallyFromTLtoBR', directions.diagonallyFromTLtoBR.foward, directions.diagonallyFromTLtoBR.backward, currentRowIndex, currentColIndex) ||
+            this.checkPossibleWinOutcomes('diagonallyFromBRtoTL', directions.diagonallyFromBRtoTL.foward, directions.diagonallyFromBRtoTL.backward, currentRowIndex, currentColIndex)
+        )
+    }
+
+    checkPossibleWinOutcomes = (outcome, direction1, direction2, cRowIndex, cColIndex) => {
+        const chainLength = 1 + this.checkDirection(direction1, cRowIndex, cColIndex) + this.checkDirection(direction2, cRowIndex, cColIndex);
+
+        if(chainLength >= 4) {
+            return this._player;
+        } else {
+            return null;
+        }
+    }
+
+    checkDirection = (direction, cRowIndex, cColIndex) => {
+        let sum = 0;
+        let i = cRowIndex + direction[0];
+        let j = cColIndex + direction[1];
+        let $nextSimilarCoinSpot = this.getSimilarCoinSpot(i, j);
+
+        while (i>=0 && i <this._boardRows && j>=0 && j<this._boardCols && 
+        $nextSimilarCoinSpot.data('player') === this._player.player) {
+            sum++;
+            i += direction[0];
+            j += direction[1];
+            $nextSimilarCoinSpot = this.getSimilarCoinSpot(i, j);
+        }
+        return sum;
+    }
+
+    getSimilarCoinSpot = (i, j) => {
+        return $(`.board-col[data-board-row='${i}'][data-board-col='${j}']`);
     }
 
     setGameStatusIndicator = (status, message) => {
