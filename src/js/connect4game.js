@@ -9,11 +9,9 @@ class Connect4Game {
         };
         this._gameStatus = 'start';
         this._gameStatusBarSelector = gameStatusBarSelector;
-        this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+        this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot.`;
         
-
         this.createGameBoard();
-        
     }
 
     createGameBoard = () => {
@@ -68,6 +66,12 @@ class Connect4Game {
     addCoin = (coinSlot) => {
         const $coinSlot = $(coinSlot);
 
+        const isthereATie = this.checkForATie();
+        if(isthereATie) {
+            this.endGame('game tied');
+            return;
+        }
+
         if($coinSlot.hasClass('empty')){
             const colIndex = $coinSlot.data('board-col');
             const $lastEmptyCoinSlotInColumn = this.getLastEmptySlotInColumn(colIndex);
@@ -77,18 +81,16 @@ class Connect4Game {
         
             const currentRowIndex = $lastEmptyCoinSlotInColumn.data('board-row');
             const currentColIndex = $lastEmptyCoinSlotInColumn.data('board-col');
-
             
             const winner = this.checkForWinner(currentRowIndex, currentColIndex);
             if(winner) {
-                alert(`Player ${winner.player} wins!`);
                 this.endGame('game won');
                 return;
             }
 
             this._player.player = (this._player.player === '1') ? '2' : '1';
             this._player.color = (this._player.color === 'yellow') ? 'red': 'yellow';
-            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot.`;
             this.setGameStatusIndicator(this._player, this._playerTurnMessage);
 
             $(this).trigger('mouseenter');
@@ -160,6 +162,16 @@ class Connect4Game {
             this.setGameStatusIndicator(this._player, message);
         }
 
+        if(reason === 'game tied') {
+            this._gameStatus = 'tie';
+            const message = `Game is tied`;
+            const status = {
+                "name": "game tied",
+                "color": "orange"
+            }
+            this.setGameStatusIndicator(status, message);
+        }
+
         $(this._gameBoardSelector).off();
         $('.board-col.empty').css("cursor", "initial");
         this._gameStatus = 'start';
@@ -170,6 +182,17 @@ class Connect4Game {
         const gameStatusBar = this._gameStatusBarSelector;
         $(`${gameStatusBar}>p`).css('color', `${status.color}`)
         .text(`${message}`)
+    }
+
+    checkForATie = () => {
+        if(!this.checkForWinner()){
+            const noOfEmptySpotsLeft = $('.board-col.empty').length;
+            if(noOfEmptySpotsLeft === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 
