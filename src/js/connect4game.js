@@ -68,6 +68,12 @@ class Connect4Game {
     addCoin = (coinSlot) => {
         const $coinSlot = $(coinSlot);
 
+        const isthereATie = this.checkForATie();
+        if(isthereATie) {
+            alert('game is tied');
+            return;
+        }
+
         if($coinSlot.hasClass('empty')){
             const colIndex = $coinSlot.data('board-col');
             const $lastEmptyCoinSlotInColumn = this.getLastEmptySlotInColumn(colIndex);
@@ -170,6 +176,17 @@ class Connect4Game {
         const gameStatusBar = this._gameStatusBarSelector;
         $(`${gameStatusBar}>p`).css('color', `${status.color}`)
         .text(`${message}`)
+    }
+
+    checkForATie = () => {
+        if(!this.checkForWinner()){
+            const noOfEmptySpotsLeft = $('.board-col.empty').length;
+            if(noOfEmptySpotsLeft === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 
