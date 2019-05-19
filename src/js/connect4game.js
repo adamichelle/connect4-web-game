@@ -9,11 +9,9 @@ class Connect4Game {
         };
         this._gameStatus = 'start';
         this._gameStatusBarSelector = gameStatusBarSelector;
-        this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+        this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot.`;
         
-
         this.createGameBoard();
-        
     }
 
     createGameBoard = () => {
@@ -70,7 +68,7 @@ class Connect4Game {
 
         const isthereATie = this.checkForATie();
         if(isthereATie) {
-            alert('game is tied');
+            this.endGame('game tied');
             return;
         }
 
@@ -83,18 +81,16 @@ class Connect4Game {
         
             const currentRowIndex = $lastEmptyCoinSlotInColumn.data('board-row');
             const currentColIndex = $lastEmptyCoinSlotInColumn.data('board-col');
-
             
             const winner = this.checkForWinner(currentRowIndex, currentColIndex);
             if(winner) {
-                alert(`Player ${winner.player} wins!`);
                 this.endGame('game won');
                 return;
             }
 
             this._player.player = (this._player.player === '1') ? '2' : '1';
             this._player.color = (this._player.color === 'yellow') ? 'red': 'yellow';
-            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot.`;
             this.setGameStatusIndicator(this._player, this._playerTurnMessage);
 
             $(this).trigger('mouseenter');
@@ -164,6 +160,16 @@ class Connect4Game {
             this._gameStatus = 'win';
             const message = `Player ${this._player.player} wins!`;
             this.setGameStatusIndicator(this._player, message);
+        }
+
+        if(reason === 'game tied') {
+            this._gameStatus = 'tie';
+            const message = `Game is tied`;
+            const status = {
+                "name": "game tied",
+                "color": "orange"
+            }
+            this.setGameStatusIndicator(status, message);
         }
 
         $(this._gameBoardSelector).off();
