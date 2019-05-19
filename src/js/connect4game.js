@@ -75,6 +75,11 @@ class Connect4Game {
             $lastEmptyCoinSlotInColumn.addClass(this._player.color);
             $lastEmptyCoinSlotInColumn.data('player', this._player.player);
 
+            this._player.player = (this._player.player === '1') ? '2' : '1';
+            this._player.color = (this._player.color === 'yellow') ? 'red': 'yellow';
+            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot`;
+            this.setGameStatusIndicator(this._player, this._playerTurnMessage);
+
             $(this).trigger('mouseenter');
         }
     }
