@@ -14,4 +14,8 @@ $(function() {
     $(gameBoardSelector).on('mouseleave', '.board-col', function() {
         newConnect4Game.removeHover(this);
     });
+
+    $(gameBoardSelector).on('click', '.board-col', function() {
+        newConnect4Game.addCoin(this);
+    });
 })

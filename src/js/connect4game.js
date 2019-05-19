@@ -65,6 +65,20 @@ class Connect4Game {
         }
     }
 
+    addCoin = (coinSlot) => {
+        const $coinSlot = $(coinSlot);
+
+        if($coinSlot.hasClass('empty')){
+            const colIndex = $coinSlot.data('board-col');
+            const $lastEmptyCoinSlotInColumn = this.getLastEmptySlotInColumn(colIndex);
+            $lastEmptyCoinSlotInColumn.removeClass(`empty next-${this._player.color}`);
+            $lastEmptyCoinSlotInColumn.addClass(this._player.color);
+            $lastEmptyCoinSlotInColumn.data('player', this._player.player);
+
+            $(this).trigger('mouseenter');
+        }
+    }
+
     setGameStatusIndicator = (status, message) => {
         const gameStatusBar = this._gameStatusBarSelector;
         $(`${gameStatusBar}>p`).css('color', `${status.color}`)
