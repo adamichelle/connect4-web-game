@@ -12,7 +12,40 @@
 <body>
     <header class="bg-dark">
         <div class="container-fluid">
-            <h1 class="text-white font-weight-bold text-monospace">Connect 4</h1>
+            <div class="row text-white ">
+                <h1 class="font-weight-bold text-monospace mr-auto">Connect 4</h1>
+                <button type="button" class="btn btn-lg text-white" data-target="#helpModal" data-toggle="modal" data-toggle="tooltip" data-placement="left" title="How to play">
+                    <i class="fa fa-question-circle fa-2x"></i>
+                </button>
+            </div>
+        </div>
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="How to play" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="How to play">How to Play</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ol>
+                        <li>Click on white circle spots to drop checkers into the last empty slot</li>
+                        <li>A win happens when:
+                            <ul>
+                                <li>You get 4 of the same colors in a row horizontally.</li>
+                                <li>You get 4 of the same colors in a column vertically.</li>
+                                <li>You get 4 of the same colors diagonally from top left to bottom right.</li>
+                                <li>You get 4 of the same colors diagonally from bottom right to top left.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -48,6 +81,7 @@
         <p class="text-center">Copyright &copy; 2019</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="src/js/main.js" type="module"></script>
 </body>
