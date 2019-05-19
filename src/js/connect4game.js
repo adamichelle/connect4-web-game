@@ -16,6 +16,15 @@ class Connect4Game {
 
     createGameBoard = () => {
         const $gameBoard = $(this._gameBoardSelector);
+        if($gameBoard.has('<tr>')) {
+            $gameBoard.off();
+            $gameBoard.empty();
+            this._player = {
+                "player": "1",
+                "color": "yellow"
+            };    
+            this._playerTurnMessage = `Player ${this._player.player}, Please select a coin spot.`;
+        };
 
         for( let row = 0; row < this._boardRows; row++) {
             let $boardRow = $('<tr>').addClass('board-row');
@@ -33,6 +42,23 @@ class Connect4Game {
         }
 
         this.setGameStatusIndicator(this._player, this._playerTurnMessage);
+        this.addEventListeners();
+    }
+
+    addEventListeners = () => {
+        const $gameBoard = $(this._gameBoardSelector);
+        const that = this;
+        $gameBoard.on('mouseenter', '.board-col', function() {
+            that.addHover(this);
+        });
+    
+        $gameBoard.on('mouseleave', '.board-col', function() {
+            that.removeHover(this);
+        });
+    
+        $gameBoard.on('click', '.board-col', function() {
+            that.addCoin(this);
+        });
     }
 
     getLastEmptySlotInColumn = (colIndex) => {
@@ -156,6 +182,7 @@ class Connect4Game {
     }
 
     endGame = (reason) => {
+        const that = this;
         if(reason === 'game won') {
             this._gameStatus = 'win';
             const message = `Player ${this._player.player} wins!`;
@@ -174,7 +201,6 @@ class Connect4Game {
 
         $(this._gameBoardSelector).off();
         $('.board-col.empty').css("cursor", "initial");
-        this._gameStatus = 'start';
         $('.game-alert').show();
     }
 
@@ -193,6 +219,11 @@ class Connect4Game {
                 return false;
             }
         }
+    }
+
+    restartGame = () => {
+        this.createGameBoard();
+        this._gameStatus = 'start';
     }
 }
 
