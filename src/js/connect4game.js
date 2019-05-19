@@ -185,13 +185,13 @@ class Connect4Game {
         const that = this;
         if(reason === 'game won') {
             this._gameStatus = 'win';
-            const message = `Player ${this._player.player} wins!`;
+            const message = `Player ${this._player.player} wins!!!`;
             this.setGameStatusIndicator(this._player, message);
         }
 
         if(reason === 'game tied') {
             this._gameStatus = 'tie';
-            const message = `Game is tied`;
+            const message = `It's a tie!!!`;
             const status = {
                 "name": "game tied",
                 "color": "orange"
