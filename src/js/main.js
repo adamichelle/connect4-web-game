@@ -7,15 +7,13 @@ $(function() {
     const gameStatusBarSelector = '#gameStatusBar';
 
     const newConnect4Game = new Connect4Game(gameBoardSelector, gameStatusBarSelector);
-    $(gameBoardSelector).on('mouseenter', '.board-col', function() {
-        newConnect4Game.addHover(this);
+
+    $('#restartGame').click(function() {
+        newConnect4Game.restartGame();
+        $('.game-alert').hide();
     });
 
-    $(gameBoardSelector).on('mouseleave', '.board-col', function() {
-        newConnect4Game.removeHover(this);
-    });
-
-    $(gameBoardSelector).on('click', '.board-col', function() {
-        newConnect4Game.addCoin(this);
-    });
+    $('#resetGame').click(function() {
+        newConnect4Game.restartGame();
+    })
 })
