@@ -13,6 +13,7 @@ main {
 .game-board-component {
     border-top-left-radius: 3em;
     border-top-right-radius: 3em;
+    position: relative;
 }
 
 .game-board {
@@ -53,4 +54,13 @@ main {
 
 .red {
     background-color: #FF0000;
+}
+
+.game-alert {
+    display: none;
+    padding: 5rem;
+    position: absolute;
+    z-index: 1;
+    top: calc(70% - 240px);
+    left: calc(70% - 283px);
 }

@@ -153,12 +153,14 @@ class Connect4Game {
     endGame = (reason) => {
         if(reason === 'game won') {
             this._gameStatus = 'win';
+            const message = `Player ${this._player.player} wins!`;
+            this.setGameStatusIndicator(this._player, message);
         }
 
         $(this._gameBoardSelector).off();
         $('.board-col.empty').css("cursor", "initial");
         this._gameStatus = 'start';
-        
+        $('.game-alert').show();
     }
 
     setGameStatusIndicator = (status, message) => {
