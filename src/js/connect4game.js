@@ -120,6 +120,8 @@ class Connect4Game {
             this.setGameStatusIndicator(this._player, this._playerTurnMessage);
 
             $(this).trigger('mouseenter');
+        } else {
+            alert('This column has no empty slots. Please choose another slot');
         }
     }
 
