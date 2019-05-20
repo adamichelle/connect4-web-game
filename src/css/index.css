@@ -64,3 +64,39 @@ main {
     top: calc(71% - 240px);
     left: calc(68% - 283px);
 }
+
+@media screen and (max-width: 500px) {
+    .board-col {
+        width: 40px;
+        height: 40px;
+        margin: 5px 10px;
+    }
+
+    main {
+        min-height: 600px;
+    }
+
+    .game-alert {
+        padding: 2.5rem;
+        top: calc(71% - 161px);
+        left: calc(75% - 224px);
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 769px) {
+    main {
+        min-height: 750px;
+    }
+
+    .board-col {
+        width: 50px;
+        height: 50px;
+        margin: 5px 10px;
+    }
+
+    .game-alert {
+        padding: 3.5rem;
+        top: calc(71% - 193px);
+        left: calc(76% - 256px);
+    }
+}
